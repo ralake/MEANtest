@@ -15,6 +15,11 @@ var Player = require('./app/models/player');
 app.set('dbUrl', config.db[app.settings.env]);
  // connect mongoose to the mongo dbUrl
 mongoose.connect(app.get('dbUrl'));
+var mdb = mongoose.connection;
+mdb.on('error', console.error.bind(console, 'connection error:'));
+mdb.once('open', function (callback) {
+    console.log("yay!")
+  });
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -29,8 +34,28 @@ var router = express.Router();              // get an instance of the express Ro
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+  res.json({ message: 'hooray! welcome to our api!' });   
 });
+
+router.route('/players')
+
+  .post(function(req, res) {
+    var player = new Player();
+    player.name = req.body.name;
+    player.save(function(err) {
+      res.send(err)
+    });
+    res.json({ message: 'Player created!' });
+  })
+
+  .get(function(req, res) {
+    Player.find(function(err, players) {
+      if (err)
+        res.send(err);
+
+    res.json(players);
+    });
+  });
 
 // more routes for our API will happen here
 
