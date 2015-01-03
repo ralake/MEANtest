@@ -57,6 +57,16 @@ router.route('/players')
     });
   });
 
+router.route('/players/:player_id')
+    // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+  .get(function(req, res) {
+    Player.findById(req.params.player_id, function(err, player) {
+      if (err)
+        res.send(err);
+      res.json(player);
+    });
+  });
+
 // more routes for our API will happen here
 
 // REGISTER OUR ROUTES -------------------------------
