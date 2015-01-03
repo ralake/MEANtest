@@ -81,6 +81,16 @@ router.route('/players/:player_id')
         res.json({ message: 'Player updated!' });
       });
     });
+  })
+
+  .delete(function(req, res) {
+    Player.remove({
+      _id: req.params.player_id
+    }, function(err, player) {
+      if (err)
+        res.send(err);
+        res.json({ message: 'Successfully deleted' });
+    });
   });
 
 // more routes for our API will happen here
