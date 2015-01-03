@@ -7,6 +7,14 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
+var mongoose   = require('mongoose');
+var config = require('./config');
+var Player = require('./app/models/player');
+ // set the 'dbUrl' to the mongodb url that corresponds to the
+ // environment we are in
+app.set('dbUrl', config.db[app.settings.env]);
+ // connect mongoose to the mongo dbUrl
+mongoose.connect(app.get('dbUrl'));
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
