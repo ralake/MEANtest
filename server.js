@@ -65,6 +65,22 @@ router.route('/players/:player_id')
         res.send(err);
       res.json(player);
     });
+  })
+
+  .put(function(req, res) {
+    // use our bear model to find the bear we want
+    Player.findById(req.params.player_id, function(err, player) {
+      if (err)
+        res.send(err);
+      player.name = req.body.name;  // update the bears info
+      // save the bear
+      player.save(function(err) {
+        if (err)
+            res.send(err);
+
+        res.json({ message: 'Player updated!' });
+      });
+    });
   });
 
 // more routes for our API will happen here
