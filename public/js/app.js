@@ -1,0 +1,1 @@
+angular.module('tableTennisApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'PlayerCtrl', 'PlayerService']);
