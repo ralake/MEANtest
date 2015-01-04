@@ -34,7 +34,7 @@ mdb.once('open', function (callback) {
     player.save(function(err) {
       res.send(err)
     });
-    res.json({ message: 'Player created!' });
+    res.redirect('/')
   })
 
   .get(function(req, res) {
@@ -46,7 +46,7 @@ mdb.once('open', function (callback) {
     });
   });
 
-  router.route('/players/:player_id')
+  router.route('/players/name')
     // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
   .get(function(req, res) {
     Player.findById(req.params.player_id, function(err, player) {
@@ -74,11 +74,11 @@ mdb.once('open', function (callback) {
 
   .delete(function(req, res) {
     Player.remove({
-      _id: req.params.player_id
+      name: req.params.name
     }, function(err, player) {
       if (err)
         res.send(err);
-        res.json({ message: 'Successfully deleted' });
+        res.redirect('/')
     });
   });
 
