@@ -2,9 +2,10 @@
   "name": "node-api",
   "main": "server.js",
   "dependencies": {
-    "express": "~4.0.0",
-    "mongoose": "~3.6.13",
     "body-parser": "~1.0.1",
-    "method-override" : "~2.0.2"
+    "ejs": "^2.0.2",
+    "express": "~4.0.0",
+    "method-override": "~2.0.2",
+    "mongoose": "~3.6.13"
   }
 }
