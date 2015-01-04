@@ -33,18 +33,9 @@ router.route('/players')
     var player = new Player();
     player.name = req.body.name;
     player.save(function(err) {
-      res.send(err)
+      res.render('index.ejs')
     });
-    res.redirect('/')
   })
-
-  .get(function(req, res) {
-    Player.find(function(err, players) {
-      if (err)
-        res.send(err);
-    res.json(players);
-    });
-  });
 
 router.route('/players/:player_id')
   .get(function(req, res) {
